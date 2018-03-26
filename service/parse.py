@@ -1,6 +1,17 @@
 # coding:utf-8
-import element_extract as extract
 import os
+
+from nlp import core_nlp as nlp
+
+
+def text_parse(text):
+    """
+    自然语言文本解析
+
+    :param text: 查询语句
+    :return:
+    """
+    words = text_ner(text)
 
 
 # 读文件
@@ -37,31 +48,41 @@ def read_sxr_rel(sxr_file):
     return person_rel_dict, person_rel_list
 
 
-# 实体抽取
-# sentence='尊敬的习大大您好'
 def text_ner(sentence):
-    word = extract.segment(sentence)
-    pos = extract.pos(word)
-    ner = extract.ner(word, pos)
+    """
+    实体识别
+    sentence='毕业于北京大学的干部'
+
+    :param sentence:
+    :return:
+    """
+    word = nlp.segment(sentence)
+    pos = nlp.pos(word)
+    ner = nlp.ner(word, pos)
     entity = list(zip(list(word), list(pos), list(ner)))
     return entity
 
 
-# 受信对象抽取
-# entities=[('尊敬', 'v', 'O'), ('的', 'u', 'O'), ('习大大', 'nh', 'S-Nh'), ('您好', 'i', 'O')]
-def sx_object_extract(entity):
-    labels = ['S-Nh', 'S-Ni']
+def entity_extract(entity):
+    """
+    实体抽取
+    entity=[('尊敬', 'v', 'O'), ('的', 'u', 'O'), ('习大大', 'nh', 'S-Nh'), ('您好', 'i', 'O')]
+
+    :param entity:
+    :return:
+    """
+    label = ['S-Nh', 'S-Ni']
     pos = ['n', 'ni', 'nh,' 'ns', 'nl']
-    sx_object = []
+    entity_object = []
     for n in entity:
-        if n[2] in labels or n[1] in pos or n[0] == '投诉办':
-            sx_object.append(n[0])
-    return sx_object
+        if n[2] in label or n[1] in pos:
+            entity_object.append(n[0])
+    return entity_object
 
 
 # 得到包含受信对象的语句
 def get_effect_sent(text):
-    sentences = extract.split(text)
+    sentences = nlp.split(text)
     # print('\n'.join(sentences))
 
     effective_sents = [sentences[0], sentences[sentences.__len__() - 1]]

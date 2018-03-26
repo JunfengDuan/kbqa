@@ -2,8 +2,8 @@
 
 
 分词工具：哈工大ltp算法包
-启动服务：python3/python sxr_recognize.py
-访问：http://host:8083/sxr_ner
+启动服务：python3/python search.py
+访问：http://host:8080/search
 
 传参格式{"text" : "..."}
 
@@ -37,3 +37,8 @@
 实体抽取：实体识别模型：模型训练-1、公开的语料库2、领域语料库
 公开语料库-》三分类通用NER模型-》开源软件（standford ner）
 领域语料库-》领域NER模型-》自己开发（idcnn + crf）
+
+问答流程：
+1、输入自然语言文本
+2、实体抽取
+3、关系抽取
