@@ -1,9 +1,11 @@
 # coding:utf-8
 from flask import Flask, request
+from flask_cors import CORS
 
 from service.parse import *
 
 app = Flask(__name__)
+CORS(app, supports_credentials=True)
 
 
 @app.route('/search', methods=['GET', 'POST'])
