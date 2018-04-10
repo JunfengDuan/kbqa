@@ -3,7 +3,7 @@ import os
 from pyltp import SentenceSplitter, Segmentor, Postagger, Parser, NamedEntityRecognizer, SementicRoleLabeller
 
 root_dir = os.path.dirname(__file__)
-LTP_DATA_DIR = os.path.join(root_dir, 'models/ltp_data_v3.4.0')  # ltp模型目录的路径
+LTP_DATA_DIR = os.path.join(root_dir, '../models/ltp_data_v3.4.0')  # ltp模型目录的路径
 
 segmentor = None
 postagger = None
@@ -27,7 +27,7 @@ def segment(text):
         segmentor.load_with_lexicon(cws_model_path, 'dict/lexicon.txt') # 加载模型，第二个参数是您的外部词典文件路径
     words = segmentor.segment(text)  # 分词
     # print(list(words))
-    return words
+    return list(words)
 
 
 # 词性标注
@@ -39,7 +39,7 @@ def pos(words):
         postagger.load(pos_model_path)  # 加载模型
     postags = postagger.postag(words)
     # print(list(zip(list(words), list(postags))))
-    return postags
+    return list(postags)
 
 
 # 实体识别
@@ -51,7 +51,7 @@ def ner(words, postags):
         recognizer.load(ner_model_path)  # 加载模型
     netags = recognizer.recognize(words, postags)  # 命名实体识别
     # print(list(zip(list(words), list(postags), list(netags))))
-    return netags
+    return list(netags)
 
 
 # 依存句法分析

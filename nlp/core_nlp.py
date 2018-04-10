@@ -3,19 +3,20 @@ import os
 import gensim
 from nlp import model_load as nlp
 
-model = gensim.models.Word2Vec.load("models/word2vec/word2vec.model")
+model = gensim.models.Word2Vec.load("../models/word2vec/word2vec.model")
+
 
 # 分词
 def text_seg(sentence):
     word = list(nlp.segment(sentence))
-    return str(word)
+    return word
 
 
 # 词性标注
 def text_pos(sentence):
     word = nlp.segment(sentence)
     pos = nlp.pos(word)
-    return str(word), str(pos)
+    return word, pos
 
 
 # 命名实体识别
@@ -23,7 +24,7 @@ def text_ner(sentence):
     word = nlp.segment(sentence)
     pos = nlp.pos(word)
     ner = nlp.ner(word, pos)
-    return str(word), str(pos), str(ner)
+    return word, pos, ner
 
 
 def text_sentence_parse(sentence):
@@ -35,7 +36,7 @@ def text_sentence_parse(sentence):
     word = nlp.segment(sentence)
     pos = nlp.pos(word)
     parsers = nlp.parse(word, pos)
-    return str(word), str(pos), str(parsers)
+    return word, pos, parsers
 
 
 def word2vector(word):
@@ -46,7 +47,7 @@ def word2vector(word):
     """
     try:
         similar_words = []
-        result = model.most_similar(word, topn=10)
+        result = model.most_similar(word, topn=5)
 
         for word in result:
             similar_words.append(word[0])
@@ -74,8 +75,9 @@ def entity_nlp(entity):
     return entity_object
 
 
-
-
-
-
-
+if __name__ == '__main__':
+    while True:
+        line = input('please input:')
+        # w = word2vector(line)
+        w = text_sentence_parse(line)
+        print(w)
