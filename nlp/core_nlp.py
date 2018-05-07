@@ -52,7 +52,7 @@ def word2vector(word):
         for word in result:
             similar_words.append(word[0])
 
-    except:
+    except Exception as e:
         print('没有匹配到相似的词')
 
     return similar_words
