@@ -3,7 +3,8 @@ import os
 import gensim
 from nlp import model_load as nlp
 
-model = gensim.models.Word2Vec.load("../models/word2vec/word2vec.model")
+# model = gensim.models.Word2Vec.load("models/word2vec/word2vec.model")
+model = None
 
 
 # 分词

@@ -23,6 +23,15 @@ def get_kblabels():
                  ['Cadre', 'Cadre_University', 'University'],
                  ['Cadre', 'Cadre_Organization', 'Organization'],
                  ['Cadre', 'Cadre_Family', 'Family'],
-                 ['Cadre', 'Cadre_Nation', 'Nation']
+                 ['Cadre', 'Cadre_Nation', 'Nation'],
+                 ['Cadre', 'Cadre_Education', 'Education'],
+                 ['Cadre', 'Cadre_Education', 'Education', 'Education_Major', 'Major']
+
                  ]
     return kb_labels
+
+
+def constraint_dict():
+    c_dict = {'大于': '>', '大于等于': '>=', '小于': '<', '小于等于': '<=', '等于': '=', '到': '<=', '非': '<>'}
+    return c_dict
+

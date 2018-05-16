@@ -49,3 +49,15 @@ lexicon:分词辅助词典
 公开语料库-》三分类通用NER模型-》开源软件（standford ner）
 领域语料库-》领域NER模型-》自己开发（idcnn + crf）
 
+example:
+1.毕业于北京大学的干部:
+rel_rdf: {'score': 1.0, 'rdf': [['Cadre', 'Cadre_University', 'University']]}
+entity_list: {'北京大学': [{'field': 'name', 'label': 'University', 'type': 'e', 'value': '北京大学', 'score': 0.9}]}
+
+2.北京大学
+rel_rdf: {'score': 'max', 'rdf': [{'University'}]}
+entity_list: {'北京大学': [{'field': 'name', 'label': 'University', 'type': 'e', 'value': '北京大学', 'score': 0.9}]}
+
+3.少数民族
+rel_rdf: {'score': 'max', 'rdf': [{'Nation'}]}
+entity_list: {'少数民族': [{'label': 'Nation', 'field': 'category', 'value': '少数民族', 'type': 'e', 'score': 0.9}]}

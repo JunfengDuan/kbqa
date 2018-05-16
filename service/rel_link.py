@@ -16,7 +16,7 @@ def label_match(re_label, elastic):
         res = elastic.search('fayuan', 'entityDict', constraint=pair, size=4)
         if res:
             for item in res:
-                if e == item['en_name']:
+                if e == item['cn_name']:
                     labels.append(item['en_name'])
                     kb_label.append(e)
     label_dict['word'] = kb_label
@@ -40,15 +40,14 @@ def rel_inference(hang_labels):
     """
     关系推理，根据知识库提供的N元组路径筛选实体类型
     :param hang_labels: 候选实体类型
-    :return:
+    :return: {score:1, rdf:[[n元关系链], [], ...]}
     """
-    rdf_list = []
+    rdf_dict = dict()
     if not hang_labels:
-        return rdf_list
+        return rdf_dict
     if len(hang_labels) <= 1:
-        rdf_dict = {'score': 'max', 'rdf': hang_labels}
-        rdf_list.append(rdf_dict)
-        return rdf_list
+        rdf_dict = {'score': 'max', 'rdf': [hang_labels]}
+        return rdf_dict
 
     kb_labels = util.get_kblabels()
     score_rdf = [rel_score_computer(hang_labels, kb_label) for kb_label in kb_labels]
@@ -63,15 +62,15 @@ def rel_inference(hang_labels):
             max_score_rdf.append(rdf)
         elif score == max_score:
             max_score_rdf.append(rdf)
-    rdf_list.append({'score': max_score, 'rdf': max_score_rdf})
-    return rdf_list
+        rdf_dict = {'score': max_score, 'rdf': max_score_rdf}
+    return rdf_dict
 
 
 def rel_score_computer(hang_labels, kb_label):
     """
     关系打分模型
     :param hang_labels:
-    :param kb_labels:
+    :param kb_label:['Person', 'Birth_Place', 'Address']
     :return:
     """
     score = 0

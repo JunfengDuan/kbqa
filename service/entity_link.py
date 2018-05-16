@@ -26,8 +26,7 @@ def entity_match(entities, elastic):
     """
     entity_with_label = dict()
     for e in entities:
-        pair = {"value": e}
-        res = elastic.search('fayuan', 'propDict', constraint=pair)
+        res = elastic.search('fayuan', 'propDict', constraint={"value": e})
         values = []
         if res:
             for item in res:
@@ -49,7 +48,7 @@ def select_top_entity(topn_entities):
     """
     从候选实体中筛选分值最高的
     :param topn_entities:
-    :return:
+    :return:{'e1':[{label:'', field:'', value:''}, {}], 'e2':[]}
     """
     max_score_entity_dict = dict()
     for word, entity_list in topn_entities.items():
