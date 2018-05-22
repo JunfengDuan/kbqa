@@ -25,7 +25,12 @@ def get_kblabels():
                  ['Cadre', 'Cadre_Family', 'Family'],
                  ['Cadre', 'Cadre_Nation', 'Nation'],
                  ['Cadre', 'Cadre_Education', 'Education'],
-                 ['Cadre', 'Cadre_Education', 'Education', 'Education_Major', 'Major']
+                 ['Cadre', 'Cadre_Education', 'Education', 'Education_Major', 'Major'],
+
+                 ['Cadre', 'Cadre_City', 'City', 'City_Province', 'Province'],
+                 ['Cadre', 'Cadre_District', 'District_City', 'City', 'City_Province', 'Province'],
+                 ['Cadre', 'Cadre_Township', 'Township', 'Township_District', 'District', 'District_City', 'City',
+                  'City_Province', 'Province']
 
                  ]
     return kb_labels

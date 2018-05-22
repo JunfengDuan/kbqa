@@ -52,12 +52,23 @@ lexicon:分词辅助词典
 example:
 1.毕业于北京大学的干部:
 rel_rdf: {'score': 1.0, 'rdf': [['Cadre', 'Cadre_University', 'University']]}
-entity_list: {'北京大学': [{'field': 'name', 'label': 'University', 'type': 'e', 'value': '北京大学', 'score': 0.9}]}
-
+entity_list: {'北京大学': [{'field': 'name', 'label': 'University', 'type': 'e', 'value': '北京大学', 'score': 0.9, 'op': '='}]}
 2.北京大学
 rel_rdf: {'score': 'max', 'rdf': [{'University'}]}
-entity_list: {'北京大学': [{'field': 'name', 'label': 'University', 'type': 'e', 'value': '北京大学', 'score': 0.9}]}
+entity_list: {'北京大学': [{'field': 'name', 'label': 'University', 'type': 'e', 'value': '北京大学', 'score': 0.9, 'op': '='}]}
 
 3.少数民族
 rel_rdf: {'score': 'max', 'rdf': [{'Nation'}]}
-entity_list: {'少数民族': [{'label': 'Nation', 'field': 'category', 'value': '少数民族', 'type': 'e', 'score': 0.9}]}
+entity_list: {'少数民族': [{'label': 'Nation', 'field': 'category', 'value': '少数民族', 'type': 'e', 'score': 0.9, 'op': '='}]}
+
+4.非少数民族的干部
+rel_rdf: {'score': 0.67, 'rdf': [['Cadre', 'Cadre_Nation', 'Nation']]}
+entity_list: {'少数民族': [{'label': 'Nation', 'field': 'category', 'value': '少数民族', 'type': 'e', 'score': 0.9, 'op': '<>'}]}
+
+5.女干部
+rel_rdf: {'score': 'max', 'rdf': [{'Cadre'}]}
+entity_list: {'女': [{'label': 'Cadre', 'field': 'gender', 'value': '女', 'type': 'e', 'score': 0.6, 'op': '='}]}
+
+6.云南省昆明市的干部
+rel_rdf: {'score': 1.2, 'rdf': [['Cadre', 'Cadre_City', 'City', 'City_Province', 'Province']]}
+entity_list: {'云南省': [{'field': 'name', 'label': 'Province', 'type': 'e', 'value': '云南省', 'score': 0.8, 'op': '='}], '昆明市': [{'field': 'name', 'label': 'City', 'type': 'e', 'value': '昆明市', 'score': 0.8, 'op': '='}]}

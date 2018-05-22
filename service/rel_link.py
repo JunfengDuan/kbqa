@@ -51,7 +51,7 @@ def rel_inference(hang_labels):
 
     kb_labels = util.get_kblabels()
     score_rdf = [rel_score_computer(hang_labels, kb_label) for kb_label in kb_labels]
-    max_score = 0
+    max_score = 0.01
     max_score_rdf = []
     for item in score_rdf:
         score = item['score']
@@ -78,7 +78,11 @@ def rel_score_computer(hang_labels, kb_label):
         if l in kb_label:
             score += 1
 
+    if score == len(hang_labels):
+        score += len(hang_labels)
+
     if score == 1:
         score = 0
+
     score = score / len(kb_label)
     return {'score': round(score, 2), 'rdf': kb_label}

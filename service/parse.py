@@ -32,8 +32,10 @@ def text_parse(text):
     re_entity = entity_filter_by_pos(words, kb_label, pos)
 
     candidate_entities = entity_match(re_entity, elastic)  # 候选实体/属性
+    print('candidate_entities:', candidate_entities)
 
     topn_entities = entity_rank(candidate_entities, kb_label)
+    print('topn_entities:', topn_entities)
 
     top_entity = select_top_entity(topn_entities)  # 待过滤的实体信息
     print('top_entity:', top_entity)
